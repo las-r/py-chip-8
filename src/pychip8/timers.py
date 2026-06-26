@@ -1,10 +1,7 @@
 import numpy as np
 import pyray as rl
+import math
 
-# pychip8 timers
-# by las-r
-
-# timers class
 class Timers:
     def __init__(self):
         self.delay = np.uint8(0)
@@ -12,6 +9,18 @@ class Timers:
         self.playing = False
         
         rl.init_audio_device()
+        smprate = 44100
+        smps = int(smprate * 0.5)
+        freq = 600
+        raw = []
+        for i in range(smps):
+            t = i / smprate
+            sample = math.sin(2 * math.pi * freq * t)
+            raw.append(sample)
+        self.data_buffer = rl.ffi.new(f"float[{smps}]", raw)
+        rl.set_audio_stream_buffer_size_default(smps)
+        self.stream = rl.load_audio_stream(smprate, 32, 1)
+        rl.update_audio_stream(self.stream, self.data_buffer, smps)
         
     def set_delay(self, val: int):
         self.delay = np.uint8(val)
@@ -30,10 +39,14 @@ class Timers:
 
     def play_beep(self):
         if not self.playing:
-            pass
+            rl.play_audio_stream(self.stream)
+            self.playing = True
 
     def stop_beep(self):
-        pass
+        if self.playing:
+            rl.stop_audio_stream(self.stream)
+            self.playing = False
     
     def deinit(self):
+        rl.unload_audio_stream(self.stream)
         rl.close_audio_device()
