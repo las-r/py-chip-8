@@ -3,7 +3,7 @@ import pyray as rl
 import math
 
 class Timers:
-    def __init__(self):
+    def __init__(self, vol: float = 0.05):
         self.delay = np.uint8(0)
         self.sound = np.uint8(0)
         self.playing = False
@@ -21,6 +21,7 @@ class Timers:
         rl.set_audio_stream_buffer_size_default(smps)
         self.stream = rl.load_audio_stream(smprate, 32, 1)
         rl.update_audio_stream(self.stream, self.data_buffer, smps)
+        rl.set_audio_stream_volume(self.stream, vol)
         
     def set_delay(self, val):
         self.delay = np.uint8(int(val))
@@ -41,6 +42,8 @@ class Timers:
         if not self.playing:
             rl.play_audio_stream(self.stream)
             self.playing = True
+        if rl.is_audio_stream_processed(self.stream):
+            rl.update_audio_stream(self.stream, self.data_buffer, len(self.data_buffer))
 
     def stop_beep(self):
         if self.playing:

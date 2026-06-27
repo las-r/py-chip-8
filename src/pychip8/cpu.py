@@ -1,7 +1,7 @@
-from display import Display
-from keypad import Keypad
-from memory import Memory
-from timers import Timers
+from .display import Display
+from .keypad import Keypad
+from .memory import Memory
+from .timers import Timers
 import numpy as np
 import random
 
@@ -17,12 +17,13 @@ class Processor:
         self.tm = tm
         self.cpf = cpf
         
-        # legacy options
-        self.cosmac_shift = True
-        self.cosmac_jump = True
-        self.cosmac_i_add = False
-        self.cosmac_font = True
-        self.cosmac_ls = False
+        # opcode options
+        self.cosmac_shift = False # def: False
+        self.cosmac_jump = False # def: False
+        self.cosmac_i_add = False # def: False
+        self.cosmac_font = True # def: True
+        self.cosmac_ls = False # def: False
+        self.vf_reset = True # def: True
         
         # data storage
         self.v = np.zeros(16, np.uint8)
@@ -96,14 +97,20 @@ class Processor:
             # set vx to vx OR vy
             case (8, _, _, 1):
                 self.v[x] |= self.v[y]
+                if self.vf_reset:
+                    self.v[0xf] = 0
                 
             # set vx to vx AND vy
             case (8, _, _, 2):
                 self.v[x] &= self.v[y]
+                if self.vf_reset:
+                    self.v[0xf] = 0
             
             # set vx to vx XOR vy
             case (8, _, _, 3):
                 self.v[x] ^= self.v[y]
+                if self.vf_reset:
+                    self.v[0xf] = 0
                 
             # set vx to vx + vy
             case (8, _, _, 4):
@@ -185,9 +192,10 @@ class Processor:
                 
             # get key
             case (15, _, 0, 10):
+                print(f"pkeys: {self.pkeys}, keys: {self.kp.keys}")
                 released = None
                 for k in range(16):
-                    if self.prev_keys[k] == 1 and self.kp.keys[k] == 0:
+                    if self.pkeys[k] == 1 and self.kp.keys[k] == 0:
                         released = k
                         break
                 if released is not None:
@@ -236,5 +244,4 @@ class Processor:
                     self.i += x + 1
                             
     def cycle(self):
-        self.prev_keys = self.kp.keys.copy()       
         self.execute(self.fetch())

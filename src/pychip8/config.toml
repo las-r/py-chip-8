@@ -1,0 +1,15 @@
+[cpu]
+cpf = 10
+cosmac_shift = false
+cosmac_jump = false
+cosmac_i_add = false
+cosmac_font = true
+cosmac_ls = false
+vf_reset = true
+
+[display]
+scale = 12
+title = "pychip8"
+
+[audio]
+volume = 0.05
