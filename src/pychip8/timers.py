@@ -22,11 +22,11 @@ class Timers:
         self.stream = rl.load_audio_stream(smprate, 32, 1)
         rl.update_audio_stream(self.stream, self.data_buffer, smps)
         
-    def set_delay(self, val: int):
-        self.delay = np.uint8(val)
+    def set_delay(self, val):
+        self.delay = np.uint8(int(val))
         
-    def set_sound(self, val: int):
-        self.sound = np.uint8(val)
+    def set_sound(self, val):
+        self.sound = np.uint8(int(val))
 
     def update(self):
         if self.delay > 0:

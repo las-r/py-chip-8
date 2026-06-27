@@ -1,5 +1,6 @@
 from cpu import *
 from display import *
+from keypad import *
 from memory import *
 from timers import *
 import pyray as rl
@@ -10,9 +11,8 @@ romname = sys.argv[1]
 with open(romname, "rb") as f:
     rom = f.read()
     
-# init emulator
-timers = Timers()
-cpu = Processor(Memory(), Display())
+# init cpu
+cpu = Processor(Memory(), Display(), Keypad(), Timers())
 cpu.ram.load_rom(rom)
 
 # main loop
@@ -23,4 +23,4 @@ while not rl.window_should_close():
 
 # deinit
 cpu.disp.deinit()
-timers.deinit()
+cpu.tm.deinit()
