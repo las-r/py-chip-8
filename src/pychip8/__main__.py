@@ -11,16 +11,16 @@ with open(romname, "rb") as f:
     rom = f.read()
     
 # init emulator
-display = Display()
-memory = Memory()
 timers = Timers()
-cpu = Processor(memory, display)
+cpu = Processor(Memory(), Display())
+cpu.ram.load_rom(rom)
 
 # main loop
 while not rl.window_should_close():
     for _ in range(cpu.cpf):
         cpu.cycle()
+    cpu.disp.render()
 
 # deinit
-display.deinit()
+cpu.disp.deinit()
 timers.deinit()

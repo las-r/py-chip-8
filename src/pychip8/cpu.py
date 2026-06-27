@@ -30,8 +30,8 @@ class Processor:
         x = (inst >> 8) & 0xf
         y = (inst >> 4) & 0xf
         n = inst & 0xf
-        nn = 0xff
-        nnn = 0xfff
+        nn = inst & 0xff
+        nnn = inst & 0xfff
         
         match (l, x, y, n):
             # clear screen
