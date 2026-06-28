@@ -47,6 +47,8 @@ Flags override the config file.
 | `--schip-scroll / --no-schip-scroll` | Halve scroll distance in low-res mode |
 | `--schip-hires-spr / --no-schip-hires-spr` | Restrict 16×16 sprites to high-res mode only |
 | `--schip-vblank / --no-schip-vblank` | Wait for vblank before drawing |
+| `--bg <hex>` | Background color |
+| `--fg <hex>` | Foreground color |
 
 ## Keypad
 The CHIP-8 hex keypad maps to the left side of a QWERTY keyboard:
