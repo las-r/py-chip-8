@@ -8,6 +8,7 @@ Requires Python 3.11+.
 
 ```sh
 pip install chip8-py
+
 # or in a local directory
 git clone https://github.com/las-r/pychip8
 cd pychip8
@@ -20,6 +21,14 @@ pychip8 path/to/rom.ch8
 ```
 
 ## Config
+### File
+On first run, a default config is created at:
+- **Windows:** `C:/Users/YOUR_USER_PROFILE/AppData/Local/pychip8/`
+- **macOS:** `~/Library/Application Support/pychip8/`
+- **Linux:** `~/.config/pychip8/`
+
+Edit this file to set your preferred defaults.
+
 ### Flags
 Flags override the config file.
 
@@ -34,14 +43,10 @@ Flags override the config file.
 | `--cosmac-font / --no-cosmac-font` | COSMAC VIP font quirk |
 | `--cosmac-ls / --no-cosmac-ls` | COSMAC VIP load/store quirk |
 | `--vf-reset / --no-vf-reset` | Reset VF after logic instructions |
-
-### File
-On first run, a default config is created at:
-- **Windows:** `C:/Users/YOUR_USER_PROFILE/AppData/Local/pychip8/`
-- **macOS:** `~/Library/Application Support/pychip8/`
-- **Linux:** `~/.config/pychip8/`
-
-Edit this file to set your preferred defaults.
+| `--spr-clip / --no-spr-clip` | Clip sprites at screen edges instead of wrapping |
+| `--schip-scroll / --no-schip-scroll` | Halve scroll distance in low-res mode |
+| `--schip-hires-spr / --no-schip-hires-spr` | Restrict 16×16 sprites to high-res mode only |
+| `--schip-vblank / --no-schip-vblank` | Wait for vblank before drawing |
 
 ## Keypad
 The CHIP-8 hex keypad maps to the left side of a QWERTY keyboard:
@@ -57,3 +62,5 @@ A 0 B F   Z X C V
 - [raylib](https://www.raylib.com/) ([Python](https://github.com/electronstudio/raylib-python-cffi/))
 - [Guide to making a CHIP-8 emulator](https://tobiasvl.github.io/blog/write-a-chip-8-emulator/)
 - [Timendus' CHIP-8 Test Suite](https://github.com/Timendus/chip8-test-suite)
+- [SUPER-CHIP v1.1 Documentation](http://devernay.free.fr/hacks/chip8/schip.txt)
+- [Mastering SuperChip](https://johnearnest.github.io/Octo/docs/SuperChip.html)
