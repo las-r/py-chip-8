@@ -1,6 +1,10 @@
 import pyray as rl
 import numpy as np
 
+# chip8py keypad
+# by las-r
+
+# chip8 key map
 KEYMAP = {
     rl.KeyboardKey.KEY_ONE: 1, rl.KeyboardKey.KEY_TWO: 2, rl.KeyboardKey.KEY_THREE: 3, rl.KeyboardKey.KEY_FOUR: 12,
     rl.KeyboardKey.KEY_Q: 4, rl.KeyboardKey.KEY_W: 5, rl.KeyboardKey.KEY_E: 6, rl.KeyboardKey.KEY_R: 13,
@@ -8,6 +12,7 @@ KEYMAP = {
     rl.KeyboardKey.KEY_Z: 10, rl.KeyboardKey.KEY_X: 0, rl.KeyboardKey.KEY_C: 11, rl.KeyboardKey.KEY_V: 15,
 }
 
+# keypad class
 class Keypad:
     def __init__(self):
         self.keys = np.zeros(16, dtype=np.uint8)

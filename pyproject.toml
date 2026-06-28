@@ -21,7 +21,7 @@ pychip8 = "pychip8.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["pychip8*"]
+include = ["chip8py*"]
 
 [tool.setuptools.package-data]
 pychip8 = ["config.toml"]

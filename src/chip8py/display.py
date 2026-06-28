@@ -1,7 +1,7 @@
 import numpy as np
 import pyray as rl
 
-# pychip8 display
+# chip8py display
 # by las-r
 
 # display class

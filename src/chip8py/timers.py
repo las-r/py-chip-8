@@ -2,6 +2,10 @@ import numpy as np
 import pyray as rl
 import math
 
+# chip8py timers
+# by las-r
+
+# timers class
 class Timers:
     def __init__(self, vol: float = 0.05):
         self.delay = np.uint8(0)

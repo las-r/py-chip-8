@@ -1,6 +1,6 @@
 import numpy as np
 
-# pychip8 memory
+# chip8py memory
 # by las-r
 
 # font

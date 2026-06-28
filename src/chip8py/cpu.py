@@ -5,7 +5,7 @@ from .timers import Timers
 import numpy as np
 import random
 
-# pychip8 cpu
+# chip8py cpu
 # by las-r
 
 # exit exception

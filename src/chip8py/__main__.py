@@ -11,6 +11,9 @@ import shutil
 import tomllib
 import pyray as rl
 
+# chip8py main
+# by las-r
+
 # setup and load config
 CONFDIR = Path(user_config_dir("pychip8"))
 CONFPATH = CONFDIR / "config.toml"
